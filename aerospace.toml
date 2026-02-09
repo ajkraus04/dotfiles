@@ -146,6 +146,7 @@ outer.right =      20
 # '''
 
 alt-f = 'fullscreen'
+alt-shift-slash = 'exec-and-forget ~/.config/scripts/toggle-cheatsheet.sh'
 alt-ctrl-f = 'layout floating tiling'
 
 alt-shift-left = 'join-with left'
