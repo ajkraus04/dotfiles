@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keybind Cheat Sheet</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+      background: #282a36;
+      color: #f8f8f2;
+      padding: 2rem;
+      line-height: 1.5;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #ff79c6;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6272a4;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Filter bar */
+    .filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      position: sticky;
+      top: 0;
+      background: #282a36;
+      padding: 1rem 0;
+      z-index: 10;
+      border-bottom: 1px solid #44475a;
+    }
+
+    .filter-btn {
+      background: #44475a;
+      color: #f8f8f2;
+      border: 1px solid #6272a4;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover { background: #6272a4; }
+    .filter-btn.active { background: #ff79c6; color: #282a36; border-color: #ff79c6; font-weight: bold; }
+
+    /* Search */
+    .search-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .search-box input {
+      background: #44475a;
+      border: 1px solid #6272a4;
+      color: #f8f8f2;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      width: 400px;
+      max-width: 90vw;
+      outline: none;
+    }
+
+    .search-box input::placeholder { color: #6272a4; }
+    .search-box input:focus { border-color: #ff79c6; }
+
+    /* Sections */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      color: #bd93f9;
+      margin-bottom: 0.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-desc {
+      color: #6272a4;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .subsection {
+      margin-bottom: 1.5rem;
+    }
+
+    .subsection-title {
+      font-size: 1rem;
+      color: #8be9fd;
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+      border-left: 3px solid #8be9fd;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.5rem;
+    }
+
+    thead th {
+      text-align: left;
+      color: #6272a4;
+      font-weight: normal;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.8rem;
+      border-bottom: 1px solid #44475a;
+    }
+
+    tbody tr { transition: background 0.15s; }
+    tbody tr:hover { background: #44475a; }
+
+    td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid #333546;
+      font-size: 0.9rem;
+    }
+
+    .key {
+      display: inline-block;
+      background: #44475a;
+      color: #ff79c6;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      border: 1px solid #6272a4;
+      white-space: nowrap;
+    }
+
+    .desc { color: #f8f8f2; }
+    .note { color: #6272a4; font-size: 0.8rem; }
+
+    /* Responsive grid for side-by-side on wide screens */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 1200px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .grid .section.full { grid-column: 1 / -1; }
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<h1>Keybind Cheat Sheet</h1>
+<p class="subtitle">All keybindings across your dev environment &mdash; merrykrausmas edition</p>
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="Search keybindings..." autofocus>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="neovim">Neovim</button>
+  <button class="filter-btn" data-filter="tmux">Tmux</button>
+  <button class="filter-btn" data-filter="aerospace">AeroSpace</button>
+  <button class="filter-btn" data-filter="atuin">Atuin</button>
+  <button class="filter-btn" data-filter="shell">Shell / Aliases</button>
+  <button class="filter-btn" data-filter="lazygit">LazyGit</button>
+</div>
+
+<div class="grid">
+
+  <!-- ==================== NEOVIM ==================== -->
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; Core</div>
+    <div class="section-desc">Leader key: Space &nbsp;|&nbsp; Theme: Rose Pine</div>
+
+    <div class="subsection">
+      <div class="subsection-title">Navigation &amp; Editing</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Space pv</span></td><td class="desc">Toggle Neo-tree file explorer</td></tr>
+          <tr><td><span class="key">Ctrl+d</span></td><td class="desc">Half-page down (centered)</td></tr>
+          <tr><td><span class="key">Ctrl+u</span></td><td class="desc">Half-page up (centered)</td></tr>
+          <tr><td><span class="key">n / N</span></td><td class="desc">Next/prev search result (centered)</td></tr>
+          <tr><td><span class="key">J</span> <span class="note">(normal)</span></td><td class="desc">Join lines (cursor stays)</td></tr>
+          <tr><td><span class="key">J</span> <span class="note">(visual)</span></td><td class="desc">Move selection down</td></tr>
+          <tr><td><span class="key">K</span> <span class="note">(visual)</span></td><td class="desc">Move selection up</td></tr>
+          <tr><td><span class="key">Ctrl+c</span> <span class="note">(insert)</span></td><td class="desc">Escape insert mode</td></tr>
+          <tr><td><span class="key">Q</span></td><td class="desc">Disabled (no accidental macro)</td></tr>
+          <tr><td><span class="key">Space f</span></td><td class="desc">Format buffer (LSP)</td></tr>
+          <tr><td><span class="key">Space s</span></td><td class="desc">Search &amp; replace word under cursor</td></tr>
+          <tr><td><span class="key">Space x</span></td><td class="desc">Make current file executable</td></tr>
+          <tr><td><span class="key">Space Space</span></td><td class="desc">Source current file</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Yank / Paste / Delete</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Space y</span></td><td class="desc">Yank to system clipboard</td></tr>
+          <tr><td><span class="key">Space Y</span></td><td class="desc">Yank line to system clipboard</td></tr>
+          <tr><td><span class="key">Space d</span></td><td class="desc">Delete without yanking</td></tr>
+          <tr><td><span class="key">Space p</span> <span class="note">(visual)</span></td><td class="desc">Paste over selection without yanking</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Quickfix / Location List</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Ctrl+k</span></td><td class="desc">Next quickfix item</td></tr>
+          <tr><td><span class="key">Ctrl+j</span></td><td class="desc">Prev quickfix item</td></tr>
+          <tr><td><span class="key">Space k</span></td><td class="desc">Next location list item</td></tr>
+          <tr><td><span class="key">Space j</span></td><td class="desc">Prev location list item</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; LSP</div>
+    <div class="section-desc">Active on LSP attach &nbsp;|&nbsp; Servers: ts_ls, lua_ls, rust_analyzer, gopls</div>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">gd</span></td><td class="desc">Go to definition</td></tr>
+        <tr><td><span class="key">K</span></td><td class="desc">Hover documentation</td></tr>
+        <tr><td><span class="key">Space vws</span></td><td class="desc">Workspace symbol search</td></tr>
+        <tr><td><span class="key">Space vd</span></td><td class="desc">Open diagnostic float</td></tr>
+        <tr><td><span class="key">Space vca</span></td><td class="desc">Code action</td></tr>
+        <tr><td><span class="key">Space vrr</span></td><td class="desc">Find references</td></tr>
+        <tr><td><span class="key">Space vrn</span></td><td class="desc">Rename symbol</td></tr>
+        <tr><td><span class="key">Ctrl+h</span> <span class="note">(insert)</span></td><td class="desc">Signature help</td></tr>
+        <tr><td><span class="key">[d</span></td><td class="desc">Next diagnostic</td></tr>
+        <tr><td><span class="key">]d</span></td><td class="desc">Prev diagnostic</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; Completion (Blink)</div>
+    <div class="section-desc">Sources: LSP, snippets, buffer, path</div>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Ctrl+p</span></td><td class="desc">Select previous item</td></tr>
+        <tr><td><span class="key">Ctrl+n</span></td><td class="desc">Select next item</td></tr>
+        <tr><td><span class="key">Ctrl+y</span></td><td class="desc">Accept completion</td></tr>
+        <tr><td><span class="key">Ctrl+Space</span></td><td class="desc">Show completions</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; FZF-Lua</div>
+    <div class="section-desc">Fuzzy finder for files, grep, git</div>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Space pf</span></td><td class="desc">Find files</td></tr>
+        <tr><td><span class="key">Ctrl+p</span></td><td class="desc">Git files</td></tr>
+        <tr><td><span class="key">Space ps</span></td><td class="desc">Grep (prompted)</td></tr>
+        <tr><td><span class="key">Space pg</span></td><td class="desc">Live grep (as you type)</td></tr>
+        <tr><td><span class="key">Space pws</span></td><td class="desc">Grep word under cursor</td></tr>
+        <tr><td><span class="key">Space pWs</span></td><td class="desc">Grep WORD under cursor</td></tr>
+        <tr><td><span class="key">Space vh</span></td><td class="desc">Help tags</td></tr>
+        <tr><td><span class="key">Space gs</span></td><td class="desc">Git status</td></tr>
+        <tr><td><span class="key">Space gb</span></td><td class="desc">Git branches</td></tr>
+        <tr><td><span class="key">Space gc</span></td><td class="desc">Git commits</td></tr>
+        <tr><td><span class="key">Space gC</span></td><td class="desc">Git buffer commits</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; Harpoon</div>
+    <div class="section-desc">Quick file switching (up to 4 slots)</div>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Space a</span></td><td class="desc">Add file to harpoon list</td></tr>
+        <tr><td><span class="key">Ctrl+e</span></td><td class="desc">Toggle harpoon menu</td></tr>
+        <tr><td><span class="key">Ctrl+h</span></td><td class="desc">Jump to file 1</td></tr>
+        <tr><td><span class="key">Ctrl+t</span></td><td class="desc">Jump to file 2</td></tr>
+        <tr><td><span class="key">Ctrl+n</span></td><td class="desc">Jump to file 3</td></tr>
+        <tr><td><span class="key">Ctrl+s</span></td><td class="desc">Jump to file 4</td></tr>
+        <tr><td><span class="key">Space Ctrl+h/t/n/s</span></td><td class="desc">Replace slot 1/2/3/4 with current file</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; Fugitive (Git)</div>
+    <div class="section-desc">Git integration inside Neovim</div>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Space gf</span></td><td class="desc">Open Fugitive (git status)</td></tr>
+        <tr><td colspan="2" class="note" style="padding-top:0.8rem">Inside Fugitive window:</td></tr>
+        <tr><td><span class="key">=</span></td><td class="desc">Inline expand diff</td></tr>
+        <tr><td><span class="key">s</span></td><td class="desc">Stage file</td></tr>
+        <tr><td><span class="key">u</span></td><td class="desc">Unstage file</td></tr>
+        <tr><td><span class="key">cc</span></td><td class="desc">Commit</td></tr>
+        <tr><td><span class="key">dv</span></td><td class="desc">Vertical diff split</td></tr>
+        <tr><td><span class="key">Space p</span></td><td class="desc">Git push</td></tr>
+        <tr><td><span class="key">Space P</span></td><td class="desc">Git pull --rebase</td></tr>
+        <tr><td><span class="key">Space t</span></td><td class="desc">Git push -u origin (prompted)</td></tr>
+        <tr><td colspan="2" class="note" style="padding-top:0.8rem">During merge conflict:</td></tr>
+        <tr><td><span class="key">gu</span></td><td class="desc">Take left (ours)</td></tr>
+        <tr><td><span class="key">gh</span></td><td class="desc">Take right (theirs)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section" data-category="neovim">
+    <div class="section-title">Neovim &mdash; Other Plugins</div>
+    <table>
+      <thead><tr><th>Key</th><th>Plugin</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Space u</span></td><td class="note">Undotree</td><td class="desc">Toggle undo history tree</td></tr>
+        <tr><td><span class="key">Space lg</span></td><td class="note">LazyGit</td><td class="desc">Open LazyGit</td></tr>
+        <tr><td><span class="key">Space mp</span></td><td class="note">Markdown Preview</td><td class="desc">Toggle markdown preview in browser</td></tr>
+        <tr><td><span class="key">Ctrl+f</span></td><td class="note">tmux</td><td class="desc">tmux-sessionizer</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection" style="margin-top: 1rem">
+      <div class="subsection-title">Cloak</div>
+      <p class="note" style="padding: 0.5rem">Auto-hides secrets in .env*, wrangler.toml, .dev.vars files</p>
+    </div>
+  </div>
+
+  <!-- ==================== LAZYGIT ==================== -->
+
+  <div class="section" data-category="lazygit">
+    <div class="section-title">LazyGit</div>
+    <div class="section-desc">Open with <span class="key">Space lg</span> in Neovim</div>
+
+    <div class="subsection">
+      <div class="subsection-title">Navigation</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">h / l</span></td><td class="desc">Switch panels</td></tr>
+          <tr><td><span class="key">j / k</span></td><td class="desc">Navigate up/down</td></tr>
+          <tr><td><span class="key">[ / ]</span></td><td class="desc">Prev/next tab</td></tr>
+          <tr><td><span class="key">?</span></td><td class="desc">Show keybindings</td></tr>
+          <tr><td><span class="key">q</span></td><td class="desc">Quit</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Files Panel</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Space</span></td><td class="desc">Stage/unstage file</td></tr>
+          <tr><td><span class="key">a</span></td><td class="desc">Stage/unstage all</td></tr>
+          <tr><td><span class="key">c</span></td><td class="desc">Commit</td></tr>
+          <tr><td><span class="key">A</span></td><td class="desc">Amend last commit</td></tr>
+          <tr><td><span class="key">d</span></td><td class="desc">Discard changes</td></tr>
+          <tr><td><span class="key">Enter</span></td><td class="desc">View file diff / stage hunks</td></tr>
+          <tr><td><span class="key">e</span></td><td class="desc">Edit file</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Branches Panel</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Space</span></td><td class="desc">Checkout branch</td></tr>
+          <tr><td><span class="key">n</span></td><td class="desc">New branch</td></tr>
+          <tr><td><span class="key">P</span></td><td class="desc">Push</td></tr>
+          <tr><td><span class="key">p</span></td><td class="desc">Pull</td></tr>
+          <tr><td><span class="key">r</span></td><td class="desc">Rebase</td></tr>
+          <tr><td><span class="key">M</span></td><td class="desc">Merge into current</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Commits Panel</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">s</span></td><td class="desc">Squash down</td></tr>
+          <tr><td><span class="key">f</span></td><td class="desc">Fixup</td></tr>
+          <tr><td><span class="key">r</span></td><td class="desc">Reword commit</td></tr>
+          <tr><td><span class="key">d</span></td><td class="desc">Drop commit</td></tr>
+          <tr><td><span class="key">g</span></td><td class="desc">Reset to commit</td></tr>
+          <tr><td><span class="key">y</span></td><td class="desc">Copy commit hash</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Stash</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">s</span> <span class="note">(files)</span></td><td class="desc">Stash changes</td></tr>
+          <tr><td><span class="key">Space</span> <span class="note">(stash panel)</span></td><td class="desc">Apply stash</td></tr>
+          <tr><td><span class="key">g</span></td><td class="desc">Pop stash</td></tr>
+          <tr><td><span class="key">d</span></td><td class="desc">Drop stash</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== TMUX ==================== -->
+
+  <div class="section" data-category="tmux">
+    <div class="section-title">Tmux</div>
+    <div class="section-desc">Prefix: Ctrl+b &nbsp;|&nbsp; Theme: Dracula (pink session)</div>
+
+    <div class="subsection">
+      <div class="subsection-title">Sessions</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Prefix d</span></td><td class="desc">Detach from session</td></tr>
+          <tr><td><span class="key">Prefix s</span></td><td class="desc">List sessions</td></tr>
+          <tr><td><span class="key">Prefix $</span></td><td class="desc">Rename session</td></tr>
+          <tr><td><span class="key">Prefix (</span></td><td class="desc">Previous session</td></tr>
+          <tr><td><span class="key">Prefix )</span></td><td class="desc">Next session</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Windows</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Prefix c</span></td><td class="desc">New window</td></tr>
+          <tr><td><span class="key">Prefix ,</span></td><td class="desc">Rename window</td></tr>
+          <tr><td><span class="key">Prefix n</span></td><td class="desc">Next window</td></tr>
+          <tr><td><span class="key">Prefix p</span></td><td class="desc">Previous window</td></tr>
+          <tr><td><span class="key">Prefix 0-9</span></td><td class="desc">Switch to window by number</td></tr>
+          <tr><td><span class="key">Prefix &</span></td><td class="desc">Kill window</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Panes</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Prefix %</span></td><td class="desc">Split vertical</td></tr>
+          <tr><td><span class="key">Prefix "</span></td><td class="desc">Split horizontal</td></tr>
+          <tr><td><span class="key">Prefix h/j/k/l</span></td><td class="desc">Navigate panes (vim-style)</td></tr>
+          <tr><td><span class="key">Prefix x</span></td><td class="desc">Kill pane</td></tr>
+          <tr><td><span class="key">Prefix z</span></td><td class="desc">Toggle pane zoom</td></tr>
+          <tr><td><span class="key">Prefix Space</span></td><td class="desc">Cycle layouts</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Copy Mode (vi)</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Prefix [</span></td><td class="desc">Enter copy mode</td></tr>
+          <tr><td><span class="key">v</span></td><td class="desc">Begin selection</td></tr>
+          <tr><td><span class="key">y</span></td><td class="desc">Copy selection</td></tr>
+          <tr><td><span class="key">q</span></td><td class="desc">Exit copy mode</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">CLI Commands</div>
+      <table>
+        <thead><tr><th>Command</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">tmux a</span></td><td class="desc">Attach to last session</td></tr>
+          <tr><td><span class="key">tmux ls</span></td><td class="desc">List sessions</td></tr>
+          <tr><td><span class="key">tmux new -s name</span></td><td class="desc">New named session</td></tr>
+          <tr><td><span class="key">tmux kill-server</span></td><td class="desc">Kill all sessions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== AEROSPACE ==================== -->
+
+  <div class="section" data-category="aerospace">
+    <div class="section-title">AeroSpace</div>
+    <div class="section-desc">Tiling window manager for macOS</div>
+
+    <div class="subsection">
+      <div class="subsection-title">App Launchers</div>
+      <table>
+        <thead><tr><th>Key</th><th>App</th><th>Workspace</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Alt+q</span></td><td class="desc">Ghostty</td><td class="note">1</td></tr>
+          <tr><td><span class="key">Alt+w</span></td><td class="desc">Cursor</td><td class="note">2</td></tr>
+          <tr><td><span class="key">Alt+e</span></td><td class="desc">Chrome</td><td class="note">3</td></tr>
+          <tr><td><span class="key">Alt+r</span></td><td class="desc">Slack</td><td class="note">4</td></tr>
+          <tr><td><span class="key">Alt+t</span></td><td class="desc">Spotify</td><td class="note">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Workspace Navigation</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Alt+1-9</span></td><td class="desc">Focus workspace 1-9</td></tr>
+          <tr><td><span class="key">Alt+Shift+1-9</span></td><td class="desc">Move window to workspace 1-9</td></tr>
+          <tr><td><span class="key">Alt+Tab</span></td><td class="desc">Toggle last workspace</td></tr>
+          <tr><td><span class="key">Alt+Shift+Tab</span></td><td class="desc">Move workspace to next monitor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Window Focus &amp; Movement</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Alt+h/j/k/l</span></td><td class="desc">Focus left/down/up/right</td></tr>
+          <tr><td><span class="key">Alt+Shift+h/j/k/l</span></td><td class="desc">Move window left/down/up/right</td></tr>
+          <tr><td><span class="key">Alt+Shift+arrows</span></td><td class="desc">Join with neighbor</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Layout &amp; Resize</div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Alt+f</span></td><td class="desc">Toggle fullscreen</td></tr>
+          <tr><td><span class="key">Alt+Ctrl+f</span></td><td class="desc">Toggle floating / tiling</td></tr>
+          <tr><td><span class="key">Alt+/</span></td><td class="desc">Toggle horizontal / vertical tiles</td></tr>
+          <tr><td><span class="key">Alt+,</span></td><td class="desc">Toggle accordion layout</td></tr>
+          <tr><td><span class="key">Alt+Shift+-</span></td><td class="desc">Resize smaller</td></tr>
+          <tr><td><span class="key">Alt+Shift+=</span></td><td class="desc">Resize larger</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Service Mode <span class="note">(Alt+Shift+;)</span></div>
+      <table>
+        <thead><tr><th>Key</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">Esc</span></td><td class="desc">Reload config + exit</td></tr>
+          <tr><td><span class="key">r</span></td><td class="desc">Reset layout (flatten)</td></tr>
+          <tr><td><span class="key">f</span></td><td class="desc">Toggle floating/tiling</td></tr>
+          <tr><td><span class="key">Backspace</span></td><td class="desc">Close all windows but current</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== ATUIN ==================== -->
+
+  <div class="section" data-category="atuin">
+    <div class="section-title">Atuin</div>
+    <div class="section-desc">Shell history search &mdash; replaces Ctrl+R</div>
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">Ctrl+r</span></td><td class="desc">Open interactive history search</td></tr>
+        <tr><td><span class="key">Up arrow</span></td><td class="desc">Browse history (filtered by typed text)</td></tr>
+        <tr><td colspan="2" class="note" style="padding-top:0.8rem">Inside search UI:</td></tr>
+        <tr><td><span class="key">Type</span></td><td class="desc">Fuzzy filter history</td></tr>
+        <tr><td><span class="key">Up / Down</span></td><td class="desc">Navigate results</td></tr>
+        <tr><td><span class="key">Enter</span></td><td class="desc">Execute selected command</td></tr>
+        <tr><td><span class="key">Tab</span></td><td class="desc">Put on prompt (edit first)</td></tr>
+        <tr><td><span class="key">Ctrl+r</span></td><td class="desc">Cycle filter: global &rarr; session &rarr; directory</td></tr>
+        <tr><td><span class="key">Esc</span></td><td class="desc">Cancel</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection" style="margin-top: 1rem">
+      <div class="subsection-title">CLI Commands</div>
+      <table>
+        <thead><tr><th>Command</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">atuin history list</span></td><td class="desc">Show recent history</td></tr>
+          <tr><td><span class="key">atuin search query</span></td><td class="desc">Search from CLI</td></tr>
+          <tr><td><span class="key">atuin stats</span></td><td class="desc">Most used commands</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== SHELL ==================== -->
+
+  <div class="section" data-category="shell">
+    <div class="section-title">Shell Aliases</div>
+    <div class="section-desc">Defined in ~/.zshrc</div>
+    <table>
+      <thead><tr><th>Alias</th><th>Command</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">c</span></td><td class="desc">clear</td></tr>
+        <tr><td><span class="key">e</span></td><td class="desc">exit</td></tr>
+        <tr><td><span class="key">n</span></td><td class="desc">nvim</td></tr>
+        <tr><td><span class="key">t</span></td><td class="desc">tmux-sessionizer</td></tr>
+        <tr><td><span class="key">tko</span></td><td class="desc">tmux kill-server</td></tr>
+      </tbody>
+    </table>
+
+    <div class="subsection" style="margin-top: 1rem">
+      <div class="subsection-title">Eza (ls replacement)</div>
+      <table>
+        <thead><tr><th>Alias</th><th>Command</th></tr></thead>
+        <tbody>
+          <tr><td><span class="key">l</span></td><td class="desc">eza -l --icons --git</td></tr>
+          <tr><td><span class="key">lt</span></td><td class="desc">eza --tree --level=2 --long --icons --git</td></tr>
+          <tr><td><span class="key">ltree</span></td><td class="desc">eza --tree --level=2 --icons --git</td></tr>
+          <tr><td><span class="key">lf</span></td><td class="desc">Tree view &rarr; fzf &rarr; open in nvim</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Filter buttons
+  const buttons = document.querySelectorAll('.filter-btn');
+  const sections = document.querySelectorAll('.section');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      sections.forEach(s => {
+        if (filter === 'all' || s.dataset.category === filter) {
+          s.classList.remove('hidden');
+        } else {
+          s.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Search
+  const searchInput = document.getElementById('search');
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase();
+    // Reset filter to all
+    if (q) {
+      buttons.forEach(b => b.classList.remove('active'));
+      buttons[0].classList.add('active');
+    }
+    sections.forEach(s => s.classList.remove('hidden'));
+
+    document.querySelectorAll('tbody tr').forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.classList.toggle('hidden', q && !text.includes(q));
+    });
+  });
+</script>
+
+</body>
+</html>
